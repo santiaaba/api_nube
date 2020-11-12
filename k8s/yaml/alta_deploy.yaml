@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: _deploy_name_
+   labels:
+      fibercorpDeploy: _fibercorpID_
+spec:
+   selector:
+      matchLabels:
+         fibercorpPod: _fibercorpID_
+   replicas: _replicas_
+   template:
+      metadata:
+         labels:
+            fibercorpPod: _fibercorpID_
+      spec:
+         _containers_
+         _volume_defs_
