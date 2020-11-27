@@ -1,13 +1,14 @@
 const K8sApi = require("./k8s_api.js")
 const metricsApi = require("./prometheus.js")
 const valid_name = /^[a-z][a-z0-9]+$/
+const config = require('../config.js')
 
 module.exports = {
 
 nuevo: function(req,res){
 
 	var inserId=0
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 	var promise
 
 	/* Verificaciones previas */
@@ -128,7 +129,7 @@ show: function(req,res){
 	   sumarizacion */
 	var datos
 	var namespace_name
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	module.exports.checkUserNamespace(req)
 	.then(ok =>{
@@ -186,7 +187,7 @@ drop: function(req,res){
 	 * eliminarlo de la base de datos. */
 
 	/* Elimina un namespace */
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	module.exports.checkUserNamespace(req)
 	.then(ok =>{
@@ -279,7 +280,7 @@ namespaceNameById: function(idNamespace){
 metrics_mem_all: function(req,res){
 	/* Retorna las metricas de uso de ram entre todos los namespaces*/
 
-	var metrics_api = new metricsApi(config.metrics_api_url,config.metrics_api_port)
+	var metrics_api = new metricsApi(config.k8s.metrics_api_url,config.k8s.metrics_api_port)
 	console.log("Metrics all")
 
 	var a = new Promise((resolv,reject) => {
@@ -329,7 +330,7 @@ metrics_mem_all: function(req,res){
 metrics_cpu_all: function(req,res){
 	/* Retorna las metricas de uso de cpu entre todos los namespaces*/
 
-	var metrics_api = new metricsApi(config.metrics_api_url,config.metrics_api_port)
+	var metrics_api = new metricsApi(config.k8s.metrics_api_url,config.k8s.metrics_api_port)
 	console.log("Metrics all")
 
 	var a = new Promise((resolv,reject) => {
@@ -379,7 +380,7 @@ metrics_cpu_all: function(req,res){
 metrics_cpu: function(req,res){
 	/* Retorna metricas de uso de cpu de un namespace */
 
-	var metrics_api = new metricsApi(config.metrics_api_url,config.metrics_api_port)
+	var metrics_api = new metricsApi(config.k8s.metrics_api_url,config.k8s.metrics_api_port)
 
 	module.exports.checkUserNamespace(req)
 	.then(ok =>{

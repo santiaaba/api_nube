@@ -1,5 +1,6 @@
 const K8sApi = require("./k8s_api.js")
 const NamespaceApi = require("./namespace.js")
+const config = require('../config.js')
 
 module.exports = {
 
@@ -11,7 +12,7 @@ nuevo: function(req,res){
 list: function(req,res){
 	/* Lista los pods de un namespace */
 
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -43,7 +44,7 @@ list: function(req,res){
 show: function(req,res){
 	/* retorna informacion sobre un pod en particular */
 
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{

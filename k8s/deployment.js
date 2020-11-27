@@ -2,6 +2,7 @@ const K8sApi = require("./k8s_api.js")
 const NamespaceApi = require("./namespace.js")
 const metricsApi = require("./prometheus.js")
 const helper = require("./helper.js")
+const config = require('../config.js')
 
 module.exports = {
 
@@ -16,7 +17,7 @@ apply: function(req,res){
 	var diccionario = new Array
 	var namespaceName
 	var errorPrevio
-	const k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	const k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	if(req.method == 'POST')
 		var alta = true
@@ -190,7 +191,7 @@ apply: function(req,res){
 list: function(req,res){
 	/* Lista los deploy de un namespace */
 
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -228,7 +229,7 @@ show: function(req,res){
 	var services
 	var ingresses
 	var namespaceName
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -341,7 +342,7 @@ status: function(req,res){
 	var services
 	var fibercorpID
 	var namespaceName
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -374,7 +375,7 @@ status: function(req,res){
 pods: function(req,res){
 	/* Retorna informacion sobre los pods
 	 * del deployment y su namespaceName */
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 	var pods
 
 	find_pods(req,res)
@@ -413,7 +414,7 @@ pods: function(req,res){
 },
 
 delete: function(req,res){
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -443,7 +444,7 @@ delete: function(req,res){
 },
 
 metrics_cpu: function(req,res){
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 	var metrics_api = new metricsApi('10.120.78.86','30000')
 
 	find_pods(req,res)
@@ -483,7 +484,7 @@ function find_pods(req,res){
 		var pods
 		var fibercorpID
 		//var namespaceName
-		var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+		var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 	
 		NamespaceApi.checkUserNamespace(req)
 		.then(ok =>{

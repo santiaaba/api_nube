@@ -1,3 +1,5 @@
+const config = require('../config.js')
+
 class K8sApi {
 	constructor(host,port){
 		this.host = host
@@ -10,9 +12,10 @@ class K8sApi {
 		return new Promise((resolve,reject) => {
 			var datos=''
 			var fs = require('fs')
-			var read = fs.readFile("yaml/" + yaml_file, (err,data) => {
+			var read = fs.readFile(config.k8s.dir +"/yaml/" + yaml_file, (err,data) => {
 				if(err){
 					console.log("Fallo lectura del archivo yaml/" + yaml_file)
+					console.log(err)
 					reject({status:500,message:"Imposible leer archivo " + yaml_file})
 					return
 				}
@@ -32,7 +35,7 @@ class K8sApi {
 					headers: {
 						'Content-Type': 'application/yaml',
 						'Content-Length': data.length,
-						'Authorization': config.k8s_token
+						'Authorization': config.k8s.token
 					}
 				}
 				//console.log(options)

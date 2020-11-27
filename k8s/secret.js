@@ -1,5 +1,6 @@
 const K8sApi = require("./k8s_api.js")
 const NamespaceApi = require("./namespace.js")
+const config = require('../config.js')
 
 module.exports = {
 
@@ -8,7 +9,7 @@ apply: function(req,res){
 	var alta = true
 	var diccionario = new Array
 	var namespaceName
-	const k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	const k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -69,7 +70,7 @@ apply: function(req,res){
 list: function(req,res){
 	/* Lista los secret de un namespace */
 
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{
@@ -101,7 +102,7 @@ list: function(req,res){
 show: function(req,res){
 	/* Retorna informacion sobre un secret en particular */
 
-	var k8s_api = new K8sApi(config.k8s_api_url,config.k8s_api_port)
+	var k8s_api = new K8sApi(config.k8s.api_url,config.k8s.api_port)
 
 	NamespaceApi.checkUserNamespace(req)
 	.then(ok =>{

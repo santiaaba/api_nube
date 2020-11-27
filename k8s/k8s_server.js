@@ -10,7 +10,7 @@ var api_secret = require('./secret.js')
 
 var bodyParser = require("body-parser")
 var cors = require('cors')
-var config = require('../config.js')
+const config = require('../config.js')
 
 var app = express()
 const port = 3000
@@ -76,8 +76,7 @@ function permiso(req,res,next){
 /*****************************
  *		Main		
  *****************************/
-
-db = new Database
+db = new Database(config)
 users = new Array
 var path = ''
 

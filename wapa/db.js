@@ -5,7 +5,7 @@ const mysql = require('mysql')
 const db_host = "localhost"
 const db_user = "k8s"
 const db_pass = "sAn474226"
-const db_db = "k8s"
+const db_db = "cloud"
 
 class Database {
 	constructor(config){

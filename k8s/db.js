@@ -2,19 +2,15 @@
 const mysql = require('mysql')
 //const mysql = require('@mysql/xdevapi')
 
-const db_host = "localhost"
-const db_user = "k8s"
-const db_pass = "sAn474226"
-const db_db = "k8s"
-
 class Database {
 	constructor(config){
+		console.log(config)
 		this.connection = mysql.createPool({
-			connectionLimit: 10,
-			host: db_host,
-			user: db_user,
-			database: db_db,
-			password: db_pass
+			connectionLimit: config.db.connectionLimit,
+			host: config.db.host,
+			user: config.db.user,
+			database: config.db.database,
+			password: config.db.pass
 		})
 	}
 	query(sql){

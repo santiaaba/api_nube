@@ -1,4 +1,5 @@
 const WapaApi = require("./wapaApi.js")
+const config = require('../config.js')
 
 module.exports = {
 

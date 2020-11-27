@@ -35,7 +35,7 @@ class WapaApi {
 				res.on('end',function(){
 					console.log("llegamos al end")
 					if(res.statusCode >= 200 && res.statusCode <= 299){
-						console.log("Es un OK: " + datos)
+						console.log("Es un OK: --" + datos + "--")
 						resolve({status:res.statusCode,message:JSON.parse(datos)})
 					} else {
 						console.log("Es un ROLLBACK")
